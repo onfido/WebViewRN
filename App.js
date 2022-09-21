@@ -25,7 +25,7 @@ class App extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <WebView 
           allowsInlineMediaPlayback={true} 
-          source={{ uri: 'https://crowd-testing.eu.onfido.app/f/755350ab-4ed2-4e4f-8834-d57c98513658/6a330150-b9ae-4f21-bcc0-45c645924bf5' }} 
+          source={{ uri: 'https://crowd-testing.eu.onfido.app/f/755350ab-4ed2-4e4f-8834-d57c98513658' }} 
           onMessage={(event) => {
             if(event.nativeEvent.data === 'onComplete'){
               alert("we have comepleted")
