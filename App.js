@@ -25,6 +25,7 @@ class App extends Component {
         <Onfido region={'EU'}  parameters={parameters} onComplete={(e) => {
           alert(JSON.stringify(e))
         }}/>
+
       </SafeAreaView>
     );
   }

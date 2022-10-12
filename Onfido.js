@@ -89,13 +89,12 @@ const defaultWebViewProps: WebViewProps = {
 };
 
 
-
 export const Onfido: FunctionComponent<OnfidoProps> = props => {
   const ref = React.createRef();
 
   const uri = `https://sdk.${props.region.toLowerCase()}.onfido.app/frame`;
 
-  const bootstrapSdk = (webview) => {
+  const bootstrapSdk = () => {
 
     const {version, parameters} = props
 
@@ -159,53 +158,36 @@ export const Onfido: FunctionComponent<OnfidoProps> = props => {
 
       bootstrap()
         .then(() => {
-          document.getElementById("spinner").remove();
+          document.getElementById("spinner")?.remove();
         })
         .catch(e => {
           alert(e.stack)
         });
-
+      
+      true
     `;
 
-    console.log(`Bootstrapping SDK ${version} with `, props);
-    console.log("running", script);
-
-    webview.injectJavaScript(script);
+    return script;
   };
 
-  const webview = useMemo(() => {
+  const handleMessage = (event: WebViewMessageEvent) => {
+    const data = JSON.parse(event.nativeEvent.data);
+    console.log(event, data)
+    props[data.method] && props[data.method](data.data);
+  };
 
-    const handleMessage = (event: WebViewMessageEvent) => {
-      const data = JSON.parse(event.nativeEvent.data);
-      console.log(event, data)
-      props[data.method] && props[data.method](data.data);
-    };
+  let sdk = undefined;
+  let loaded = false;
 
-    console.log("memo called");
+  return <WebView
+    {...props.webviewPros}
+    {...defaultWebViewProps}
+    source={{ uri: uri }}
+    ref={ref}
+    onMessage={handleMessage}
+    injectedJavaScriptForMainFrameOnly={true}
+    injectedJavaScript={bootstrapSdk()}
 
+  />;
 
-    let sdk = undefined;
-    let loaded = false;
-
-    return <WebView
-      {...props.webviewPros}
-      {...defaultWebViewProps}
-      source={{ uri: uri }}
-      ref={ref}
-      onMessage={handleMessage}
-      onLoad={() => {
-
-        if (loaded) {
-          return;
-        }
-
-        loaded = true;
-        bootstrapSdk(ref.current);
-      }}
-      injectedJavaScriptForMainFrameOnly={true}
-
-    />;
-  }, []);
-
-  return (webview);
 };
