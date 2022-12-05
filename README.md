@@ -38,9 +38,9 @@ You will need to enable Camera, mic, Photo library and location Access in you in
     <string>Camera Access</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Location Access</string>
-    <key></key>
+    <key>NSMicrophoneUsageDescription</key>
     <string>Mic Access</string>
-    <key></key>
+    <key>NSPhotoLibraryUsageDescription</key>
     <string>Photo Library Access</string>
 ```    
 
