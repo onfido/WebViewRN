@@ -33,6 +33,17 @@ You will need to enable Camera, mic, Photo library and location Access in you in
 	<key>UILaunchStoryboardName</key>
 ```
 
+```info.plist	
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Access</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Mic Access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library Access</string>
+```
+
 ### Android
 
 Below is the list of permissons you will need to add to the AndroidManifest.xml file. 
