@@ -21,18 +21,6 @@ Click through for more guide line on:
 
 You will need to enable Camera, mic, Photo library and location Access in you info.plist file. 
 
-```info.plist
-  	<key>NSCameraUsageDescription</key>
-	<string>Camera Access</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location Access</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Mic Access</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo library Access</string>
-```
-
-
 ```AndroidManifest.xml
     <key>NSCameraUsageDescription</key>
     <string>Camera Access</string>
@@ -64,7 +52,16 @@ android:usesCleartextTraffic="true"
     
 ## Integration with smart-capture-link
 
+The simplest webview set up with no callback injection is just to insert the link to workflow smart-capture-link for `source.uri` property.
+	
+```WebView set up
+ <WebView 
+          allowsInlineMediaPlayback={true} 
+          source={{ uri: 'https://crowd-testing.eu.onfido.app/f/755350ab-4ed2-4e4f-8834-d57c98513658' }} //link to smart-capture-link workflow    
+        />
+```        
 
+For injecting onComplete or onError callbacks you will need to inject javascript to set up event and then using onMessage start listening the events you have set up. Example below used SDK's setOptions property to inject javascript which runs only once when the webview is loaded. when SDK triggers onComplete or onError, the react-native webview sends a message to the app in order to execute the the callback scripts. 
 
 ```WebView set up
  <WebView 
@@ -86,7 +83,8 @@ android:usesCleartextTraffic="true"
           injectedJavaScript={runFirst}
         />
 ```        
-
+Note: `injectedJavaScript` takes its value as string, therefore you will need to inject you javascript to string.
+	 
 ```js
         const runFirst = `
       onfido.setOptions({onComplete: () => window.ReactNativeWebView.postMessage("onComplete"),onError: () => window.ReactNativeWebView.postMessage("onError")});
@@ -96,6 +94,7 @@ android:usesCleartextTraffic="true"
 
 
 ##  Integration with hosted SDK
+	 Example below bootsrapt the SDK using the hosted version and confuguring the steps without workflow.
  
 ```WebView set up
 <WebView 
@@ -109,7 +108,7 @@ android:usesCleartextTraffic="true"
 
 ```Injected js
 const runFirstX = `
-    Onfido.init({containerEl: document.body,token: <SDK_TOKEN>});document.querySelector("#spinner")?.remove();
+    Onfido.init({containerEl: document.body,token:<SDK_TOKEN>,steps:['document','face']});document.querySelector("#spinner")?.remove();
     true; // note: this is required, or you'll sometimes get silent failures
   `;
 ```
