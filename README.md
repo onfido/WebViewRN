@@ -30,19 +30,18 @@ You will need to enable Camera, mic, Photo library and location Access in you in
 	<string>Mic Access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library Access</string>
-	<key>UILaunchStoryboardName</key>
 ```
 
 
 ```AndroidManifest.xml
+    <key>NSCameraUsageDescription</key>
+    <string>Camera Access</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Location Access</string>
     <key></key>
-    <string></string>
+    <string>Mic Access</string>
     <key></key>
-    <string></string>
-    <key></key>
-    <string></string>
-    <key></key>
-    <string></string>
+    <string>Photo Library Access</string>
 ```    
 
 ### Android
