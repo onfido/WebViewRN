@@ -94,7 +94,8 @@ Note: `injectedJavaScript` takes its value as string, therefore you will need to
 
 
 ##  Integration with hosted SDK
-	 Example below bootsrapt the SDK using the hosted version and confuguring the steps without workflow.
+	 
+Example below bootsrapt the SDK using the hosted version and confuguring the steps without workflow.
  
 ```WebView set up
 <WebView 
@@ -107,7 +108,7 @@ Note: `injectedJavaScript` takes its value as string, therefore you will need to
 ```
 
 ```Injected js
-const runFirstX = `
+const runFirst = `
     Onfido.init({containerEl: document.body,token:<SDK_TOKEN>,steps:['document','face']});document.querySelector("#spinner")?.remove();
     true; // note: this is required, or you'll sometimes get silent failures
   `;
