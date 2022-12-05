@@ -7,9 +7,12 @@ This app is a simple guide demonstrating minimum configurations that are require
 The example is using smart-capture-link and/or a hosted verison of the SDK. However the same configuration should apply if with any other hosted onfido-sdk-ui. 
 
 Click through for more guide line on:
-[React-native web-view component](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md)
-[onfido-sdk-ui](https://documentation.onfido.com/sdk/web/)
-[Smart-capture-link](https://developers.onfido.com/guide/smart-capture-link)
+- [React-native web-view component](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md)
+
+- [onfido-sdk-ui](https://documentation.onfido.com/sdk/web/)
+
+- [Smart-capture-link](https://developers.onfido.com/guide/smart-capture-link)
+
 
 
 ## Permissions
@@ -19,7 +22,7 @@ Click through for more guide line on:
 You will need to enable Camera, mic, Photo library and location Access in you info.plist file. 
 
 ```info.plist
-  <key>NSCameraUsageDescription</key>
+  	<key>NSCameraUsageDescription</key>
 	<string>Camera Access</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location Access</string>
@@ -55,7 +58,7 @@ android:usesCleartextTraffic="true"
 ```WebView set up
  <WebView 
           allowsInlineMediaPlayback={true} 
-          source={{ uri: 'https://crowd-testing.eu.onfido.app/f/755350ab-4ed2-4e4f-8834-d57c98513658' }} 
+          source={{ uri: 'https://crowd-testing.eu.onfido.app/f/755350ab-4ed2-4e4f-8834-d57c98513658' }} //link to smart-capture-link workflow
           onMessage={(event) => {
             if(event.nativeEvent.data === 'onComplete'){
               alert("we have comepleted")
@@ -87,7 +90,7 @@ android:usesCleartextTraffic="true"
 <WebView 
           originWhitelist={['*']}
           allowsInlineMediaPlayback={true} 
-          source={{ uri: 'https://sdk.eu.onfido.app/frame' }} 
+          source={{ uri: 'https://sdk.eu.onfido.app/frame' }} // the link to the hosted SDK
           injectedJavaScript={runFirst}
           useWebKit={true}
     />
