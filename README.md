@@ -1,17 +1,16 @@
 # WebViewRN
-A sample react-native app integrating with onfdio-sdk-ui using Web-view component. 
+A sample react-native app integration with Onfido’s [Web SDK](https://documentation.onfido.com/sdk/web/), using a webview component. 
 
 ## Summary
 
-This app is a simple guide demonstrating minimum configurations that are required to integrate with onfido-sdk-ui using a react-native webview component.
-The example is using smart-capture-link and/or a hosted verison of the SDK. However the same configuration should apply if with any other hosted onfido-sdk-ui. 
+This app is a simple demonstration of the minimum configurations that are required to integrate with [onfido-sdk-ui](https://documentation.onfido.com/sdk/web/) using a react-native webview component. The example uses [Smart Capture Link](https://developers.onfido.com/guide/smart-capture-link) and/or a hosted version of the SDK. In either case, the same configuration should apply as it would with any other hosted onfido-sdk-ui. 
 
-Click through for more guide line on:
-- [React-native web-view component](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md)
+You can find more detailed documentation here:
+- [React-native webview component](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md)
 
 - [onfido-sdk-ui](https://documentation.onfido.com/sdk/web/)
 
-- [Smart-capture-link](https://developers.onfido.com/guide/smart-capture-link)
+- [Smart Capture Link](https://developers.onfido.com/guide/smart-capture-link)
 
 
 
@@ -19,7 +18,7 @@ Click through for more guide line on:
 
 ### iOS
 
-You will need to enable Camera, mic, Photo library and location Access in you info.plist file. 
+You will need to enable Camera, Mic, Photo Library and Location Access in your `info.plist` file: 
 
 ```AndroidManifest.xml
     <key>NSCameraUsageDescription</key>
@@ -34,7 +33,7 @@ You will need to enable Camera, mic, Photo library and location Access in you in
 
 ### Android
 
-Below is the list of permissons you will need to add to the AndroidManifest.xml file. 
+Below is the list of permissions you will need to add to the `AndroidManifest.xml` file: 
 
 ```AndroidManifest.xml
     <uses-permission android:name="android.permission.INTERNET" />
@@ -44,15 +43,15 @@ Below is the list of permissons you will need to add to the AndroidManifest.xml 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ```    
 
-Also add this prop to <application> tag
+You will also need to add this prop to <application> tag:
 
 ```AndroidManifest.xml
 android:usesCleartextTraffic="true"
 ```  
     
-## Integration with smart-capture-link
+## Integration with Smart Capture Link
 
-The simplest webview set up with no callback injection is just to insert the link to workflow smart-capture-link for `source.uri` property.
+The easiest webview set up with no callback injection is to simply insert the Smart Capture Link to the workflow in the `source.uri` property:
 	
 ```WebView set up
  <WebView 
@@ -61,7 +60,7 @@ The simplest webview set up with no callback injection is just to insert the lin
         />
 ```        
 
-For injecting onComplete or onError callbacks you will need to inject javascript to set up event and then using onMessage start listening the events you have set up. Example below used SDK's setOptions property to inject javascript which runs only once when the webview is loaded. when SDK triggers onComplete or onError, the react-native webview sends a message to the app in order to execute the the callback scripts. 
+To inject `onComplete` or `onError` callbacks, you will need to inject javascript to set up events and then use `onMessage` to start listening for the events you have set up. The example below uses the SDK's `setOptions` property to inject javascript, which runs only once when the webview is loaded. When the SDK triggers `onComplete` or `onError`, the react-native webview sends a message to the app in order to execute the callback scripts: 
 
 ```WebView set up
  <WebView 
@@ -83,7 +82,7 @@ For injecting onComplete or onError callbacks you will need to inject javascript
           injectedJavaScript={runFirst}
         />
 ```        
-Note: `injectedJavaScript` takes its value as string, therefore you will need to inject you javascript to string.
+**Note**: `injectedJavaScript` takes its value as a string, therefore you will need to inject your javascript to string:
 	 
 ```js
         const runFirst = `
@@ -95,7 +94,7 @@ Note: `injectedJavaScript` takes its value as string, therefore you will need to
 
 ##  Integration with hosted SDK
 	 
-Example below bootsrapt the SDK using the hosted version and confuguring the steps without workflow.
+The example below bootstraps the SDK using the hosted version, configuring the steps without the workflow:
  
 ```WebView set up
 <WebView 
